@@ -18,12 +18,24 @@ devtools::install_github("weiliu123/PCLassoCox")
 
 # Details
 
-Package: PCLasso Type: Package Title: A protein complex-based group
-lasso-Cox model for accurate prognosis and risk protein complex
-discovery Version: 1.0 Date: 2021-01-29 <Authors@R>: c(person(given =
-“Wei”, family = “Liu”, email = “<freelw@qq.com>”, role = c(“cre”,
-“aut”),comment = c(ORCID = “0000-0002-5496-3641”))) Depends: R (&gt;=
-3.5.0), grpreg Imports: survival
+Package: PCLasso
+
+Type: Package
+
+Title: A protein complex-based group lasso-Cox model for accurate
+prognosis and risk protein complex discovery
+
+Version: 0.0.0.9000
+
+Date: 2021-01-29
+
+<Authors@R>: c(person(given = “Wei”, family = “Liu”, email =
+“<freelw@qq.com>”, role = c(“cre”, “aut”),comment = c(ORCID =
+“0000-0002-5496-3641”)))
+
+Depends: R (&gt;= 3.5.0)
+
+Imports: grpreg, survival
 
 Description: The PCLasso model is a prognostic model which selects
 important predictors at the protein complex level to achieve accurate
@@ -95,14 +107,12 @@ group lasso for integrative multi-omics analysis. Journal of
 computational biology: a journal of computational molecular cell
 biology, 22, 73-84.
 
-## Example
+# Example
 
 ``` r
 library(PCLassoCox)
 
-library("survival")
-
-## load data
+# load data
 data(GBM)
 data(PCGroup)
 
@@ -110,21 +120,21 @@ cv.fit1 <- cv.PCLasso(x = GBM$GBM.train$Exp,
                       y = GBM$GBM.train$survData, 
                       group = PCGroup, nfolds = 5)
                      
-## plot the norm of each group
+# plot the norm of each group
 plot(cv.fit1, norm = TRUE)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
 ``` r
-## plot the individual coefficients
+# plot the individual coefficients
 plot(cv.fit1, norm = FALSE)
 ```
 
 <img src="man/figures/README-example-2.png" width="100%" />
 
 ``` r
-## plot the cross-validation error (deviance)
+# plot the cross-validation error (deviance)
 plot(cv.fit1, type = "all")
 ```
 
@@ -132,7 +142,7 @@ plot(cv.fit1, type = "all")
 
 ``` r
 
-## predict risk scores of samples in GBM.test
+# predict risk scores of samples in GBM.test
 s <- predict(object = cv.fit1, x = GBM$GBM.test$Exp, type="link", 
              lambda=cv.fit1$cv.fit$lambda.min)
 
@@ -142,7 +152,7 @@ s <- predict(object = cv.fit1, x = GBM$GBM.test$Exp, type="link",
 s <- predict(object = cv.fit1, x = GBM$GBM.test$Exp, type="link", 
              lambda= c(0.1, 0.01))
 
-## Nonzero coefficients
+# Nonzero coefficients
 sel.groups <- predict(object = cv.fit1, type="groups", 
                       lambda = cv.fit1$cv.fit$lambda.min)
                       
@@ -156,8 +166,8 @@ sel.nvars.unique <- predict(object = cv.fit1, type="nvars.unique",
                             lambda = cv.fit1$cv.fit$lambda.min)                     
 
 
-## For values of lambda not in the sequence of fitted models, 
-## linear interpolation is used.
+# For values of lambda not in the sequence of fitted models, 
+# linear interpolation is used.
 sel.groups <- predict(object = cv.fit1, type="groups", lambda = c(0.1,0.05))
 
 sel.ngroups <- predict(object = cv.fit1, type="ngroups", lambda = c(0.1,0.05))
@@ -168,20 +178,3 @@ sel.vars.unique <- predict(object = cv.fit1, type="vars.unique",
 sel.nvars.unique <- predict(object = cv.fit1, type="nvars.unique", 
                             lambda = c(0.1,0.05))
 ```
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
