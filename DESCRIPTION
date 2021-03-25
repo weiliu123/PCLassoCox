@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-5496-3641"))
 Description: The PCLasso model is a prognostic model which selects important predictors at the protein complex level to achieve accurate prognosis and identify risk protein complexes.
 Depends: R (>= 3.5.0)
-Imports: survival, grpreg
+Imports: grpreg, survival
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
