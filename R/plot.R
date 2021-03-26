@@ -41,8 +41,8 @@ plotRS <- function(rs, y.status, cutoff = median(rs),
              call. = FALSE)
     }
 
-    p = ggplot2::ggplot(df.rs, ggplot2::aes(x = df.rs$x, y = df.rs$y))
-    p + ggplot2::geom_col(ggplot2::aes(fill = df.rs$status),
+    p = ggplot2::ggplot(df.rs, ggplot2::aes_string(x = "x", y = "y"))
+    p + ggplot2::geom_col(ggplot2::aes_string(fill = "status"),
                  position = "dodge")+   # 直接使用数值画barplot时，用geom_col(),而不是geom_bar()
         ggplot2::geom_vline(xintercept = length(which(rs <= cutoff)), linetype = "dashed",
                    colour = "grey", size = 0.5)+
@@ -195,7 +195,7 @@ plotTDAUC <- function(rs, y, npoint = 50, col = "red"){
         auc = aucSeq)
 
     p = ggplot2::ggplot(df.auc,
-                        ggplot2::aes(x = df.auc$time, y = df.auc$auc))
+                        ggplot2::aes_string(x = "time", y = "auc"))
     p + ggplot2::geom_line(color = col)+
         ggplot2::labs(x="Survival time",
                       y="Time-dependent AUC")+
