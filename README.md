@@ -14,6 +14,12 @@ risk protein complex discovery.
 ``` r
 # install.packages("devtools")
 devtools::install_github("weiliu123/PCLassoCox")
+
+# Some people may encounter the error message "Error in utils::download.file", 
+# which is usually caused by secure package downloads. Try to set the R 
+# "download.file.method" option as follows before installing the software 
+# package (https://support.rstudio.com/hc/en-us/articles/206827897-Secure-Package-Downloads-for-R). 
+options(download.file.method = "wininet")
 ```
 
 # Details
