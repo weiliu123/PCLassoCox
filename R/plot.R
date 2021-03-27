@@ -174,8 +174,8 @@ plotTDAUC <- function(rs, y, npoint = 50, col = "red"){
              call. = FALSE)
     }
 
-    if (!requireNamespace("survminer", quietly = TRUE)) {
-        stop("Package \"survminer\" needed for this function to work. Please install it.",
+    if (!requireNamespace("survcomp", quietly = TRUE)) {
+        stop("Package \"survcomp\" needed for this function to work. Please install it.",
              call. = FALSE)
     }
 
